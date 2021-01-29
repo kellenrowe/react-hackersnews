@@ -9,10 +9,7 @@ import React from "react";
  *  App -> StoryList -> { SearchForm, Story }
  */
 class SearchForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { term: "" };
-  }
+  state = { term: "" };
 
   handleChange = (evt) => {
     this.setState({ term: evt.target.value })
@@ -33,7 +30,6 @@ class SearchForm extends React.Component {
             onChange={this.handleChange} />
           <button>Search</button>
         </form>
-       
       </div>
     );
   }

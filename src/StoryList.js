@@ -6,16 +6,13 @@ import Story from "./Story";
 /** Render StoryList component
  * 
  *  State:
- *  - storyLinks: Array of objs containing story URL and title
+ *  - storyObjs: Array of objs containing story URL and title
  *  - term: term to get the stories by
  *  
  *  App -> StoryList -> { SearchForm, Story }
  */
 class StoryList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { storyLinks: [], term: "" };
-  }
+  state = { storyObjs: [], term: "" };
 
   async componentDidUpdate() {
     // If new term, make a search
@@ -23,8 +20,10 @@ class StoryList extends React.Component {
       let resp = await axios.get(
         `https://hn.algolia.com/api/v1/search?query=${this.state.term}`);
 
-      let storyObjs = resp.data.hits.map(h => ({ url: h.url, title: h.title, id: h.objectID }));
-      this.setState({ storyLinks: storyObjs });
+      let storyObjs = resp.data.hits.map(h => (
+        { url: h.url, title: h.title, id: h.objectID }
+      ));
+      this.setState({ storyObjs });
     }
   }
 
@@ -34,7 +33,7 @@ class StoryList extends React.Component {
   
   render() {
     // map through story list to generate individual stories
-    let storyList = this.state.storyLinks.map(l => (
+    let storyList = this.state.storyObjs.map(l => (
       <Story key={l.id} title={l.title} url={l.url} />
     ));
 
