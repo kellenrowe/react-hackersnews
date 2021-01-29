@@ -4,7 +4,7 @@ import React from "react";
 /** Render SearchForm component
  * 
  *  State:
- *  - formData: input from user
+ *  - term: input from user
  *  
  *  App -> StoryList -> { SearchForm, Story }
  */
